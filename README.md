@@ -2,71 +2,76 @@
 ### **_(Ubah file README.md ini setelah program diselesaikan)_**
 
 ## Latar Belakang
-*Path Finding* adalah masalah yang berfokus untuk mencari langkah paling optimum untuk bergerak dari posisi asal ke posisi akhir dengan batasan-batasan (*constraints*) tertentu. 
+*Path Finding* adalah masalah yang berfokus untuk mencari langkah paling optimum untuk bergerak dari posisi asal ke posisi akhir dengan batasan-batasan (*constraints*) tertentu. Masalah ini dapat diselesaikan dengan mudah menggunakan pendekatan strategi algoritma *dynamic programming* seperti pada contoh berikut oleh  [GeeksForGeeks](https://www.geeksforgeeks.org/min-cost-path-dp-6/). Banyak penerapan yang memiliki fokus berbeda terkait topik *Path Finding* seperti pada robot, game, image processing serta pengelolahan efisien industri. Semua kasus ini berkutat dalam mengoptimasi dari sisi paling pendek, paling murah, paling cepat dan parameter lainnya. 
+
+Pada tugas kali ini, anda akan bertugas untuk memodifikasi algoritma *path finding* agar sesuai dengan kebutuhan soal. Diharapkan melalui tugas ini, anda dapat lebih memahami penerapan strategi *dynamic programming* yang sering digunakan dalam dunia IT terkhusus filosofi cara berpikir penyelesaian masalah terkait *path finding*. Selamat mengerjakan!
+
+## Kasus Path Finding
+Berikut adalah deskripsi kondisi persoalan yang akan diselesaikan.
+1. Terdapat sebuah papan catur *N x N* dengan setiap kotaknya berisi bilangan non negatif.
+2. Di awal, suatu bidak berada kotak (1, 1) atau yang di pojok kiri atas.
+3. Berikutnya secara berulang bidak dapat dipindahkan (1) horizontal ke kanan, atau (2) vertikal ke bawah sekian kotak sebanyak dengan bilangan pada kotak terakhir bidak itu berada, kecuali kalau membawa bidak keluar dari papan.
+4. Tujuan akhir adalah kotak (N, N) atau yang pojok kanan bawah.
+5. Bila bilangan terakhir adalah 0 dan bukan di pojok maka bidak berhenti (tidak dapat melanjutkan langkah kecuali kalau sudah mencapai tujuan).
 
 ## Spesifikasi
-Buatlah dalam bahasa pemrograman **_Go_**, sebuah web service berupa **_REST API_**, yang dapat mengeja (dalam bahasa Indonesia) dari angka yang diberikan serta menuliskan angka yang tepat dari masukkan ejaan angka (dalam bahasa Indonesia juga), dengan ketentuan-ketentuan sebagai berikut :
+Lakukan fork terhadap repository ini.
 
-1. Terdapat 2 buah endpoint API yang perlu dibuat, yaitu '**GET** /spell' yang menerima parameter angka, serta '**POST** /read' yang menerima body/payload berupa text/ejaan. Jika input parameter atau body/payload tidak valid, maka berikan response keterangan error/gagal dengan format dibebaskan.
+Buatlah dalam bahasa pemrograman **_Python_** atau **_C++_**, sebuah fungsi dalam program berbasis CLI yang dapat menyelesaikan persoalan cerita diatas yang menghitung :
+1. Banyaknya cara yang mungkin untuk bisa mencapai tujuan akhir.
+2. Waktu yang digunakan untuk mencari semua solusi.
 
-2. Sebagai REST API, maka response harus berupa JSON. Struktur data response JSON dibebaskan.
+Deklarasi fungsi :
+```C++
+int pathFinding(papanCatur);
+```
+Fungsi menampilkan jumlah kemungkinan dan waktu ke layar serta melakukan pengembalian jumlah kemungkinan tersebut.
 
-3. Program dibuat dengan mengikuti standar development resmi Go (lihat referensi #3), yaitu environment kode program berada pada ```$GOPATH/src/```, misalkan ```$GOPATH/src/github.com/Indonesian-Numeral-Spellers```.
-
-4. Arsitektur program dibebaskan (boleh mengikuti referensi-referensi _REST API with Go_ dari internet), namun harus tetap tersusun dengan rapi dan mengerti apa kegunaan setiap fungsi, file, serta package.
-
-5. Batasan kasus uji : 2000000000 (dua milyar)
+**Setelah program dan laporan pada Readme.md anda sudah selesai, lakukan pull request kembali pada branch ini.**
 
 ## Contoh Kasus Uji
-### Contoh Kasus Uji 1 : Pengejaan
-Request :
+### Contoh Kasus Uji 1 
+Input :
 ```
-GET '/spell?number=123456'
+2 3 3 1
+1 2 1 3
+1 2 3 1
+3 1 1 0
 ```
-Response :
-```JSON
-STATUS CODE 200
-{
-    "status" : "OK",
-    "text" : "seratus dua puluh tiga ribu empat ratus lima puluh enam"
-}
+Output :
 ```
-### Contoh Kasus Uji 2 : Pembacaan
-Request:
-```JSON
-POST '/read'
-{
-    "text" : "seribu sembilan ratus sembilan puluh tujuh"
-}
+6
+20ms
 ```
-Response :
-```JSON
-STATUS CODE 200
-{
-    "status" : "OK",
-    "number" : 1997
-}
-```
+Penjelasan :
+jalur yang mungkin adalah
+1. [1][1] -> [2][2] -> [2][4] -> [4][4]
+2. [1][1] -> [3][1] -> [4][3] -> [4][4]
+3. [1][1] -> [3][1] -> [3][4] -> [4][4]
+4. [1][1] -> [1][3] -> [1][4] -> [4][4]
+5. [1][1] -> [1][3] -> [2][3] -> [3][4] -> [4][4]
+6. [1][1] -> [1][3] -> [2][3] -> [4][3] -> [4][4]
 
-## Bonus
-Buatlah sebuah aplikasi mobile atau website dengan tampilan menarik, yang menggunakan kedua API tersebut. Semakin menarik tampilan, semakin tinggi poin yang akan didapat.
-
-Teknologi yang direkomendasikan : **React.js**
+### Contoh Kasus Uji 2
+Input:
+```
+2 3 0 1 3 1
+1 0 1 3 1 3
+0 2 3 1 3 1
+3 1 1 0 1 0
+1 2 1 3 1 3
+3 1 1 0 1 0
+```
+Output :
+```
+0
+1ms
+```
 
 ## Penilaian
-- Kebenaran fungsionalitas program.
-- Kebenaran API.
-- Pemahaman tentang bahasa pemrograman **Go** serta **REST API**.
-- Kerapihan _repository_ & kode, termasuk **README** (fungsi program, contoh request & response dari setiap endpoint) dan **arsitektur kode Go**.
-- UI (bonus).
+- Kebenaran keluaran fungsi - 40%
+- Pemahaman tentang dynamic programming dan path finding (jelaskan langkah yang digunakan secara singkat) - 30%
+- Kecepatan eksekusi program (lampirkan screenshot pada readme beserta spesifikasi mesin yang dipakai untuk testing) - 20%
+- Kecepatan Pull Request - 10%
 
-Nilai maksimum yang bisa didapatkan adalah **1600 (2600 dengan bonus)** poin. <br>
-_(Seribu Enam Ratus)_
-
-## Referensi Pengerjaan _(sangat disarankan untuk diikuti dengan baik)_
-1. https://golang.org/doc/install
-2. https://github.com/golang/go/wiki/SettingGOPATH
-3. https://golang.org/doc/code.html#Introduction
-4. https://tour.golang.org/welcome/1
-5. https://openclassrooms.com/en/courses/3432056-build-your-web-projects-with-rest-apis/3496011-identify-examples-of-rest-apis
-6. https://www.codementor.io/codehakase/building-a-restful-api-with-golang-a6yivzqdo
+Nilai maksimum yang bisa didapatkan adalah **700** poin. _(Tujuh Ratus)_
