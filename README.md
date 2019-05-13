@@ -68,6 +68,14 @@ Output :
 1ms
 ```
 
+## *Path Finding*
+*Path Finding* merupakan salah satu permasalahan dalam dunia komputasi. Jadi dalam permasalahan umumnya kita diharuskan mencari jalur keluar dari suatu titik awal. Biasanya kita diharuskan mencari jarak terpendek, jalur yang dilewati, maupun banyaknya jalur yang bisa dibentuk. Permasalahan *path finding* biasanya ditemui pada suatu permasalahan khususnya permasalahan tentang mencari jalur keluar.
+
+## Dynamic Programming
+Pada permasalahan ini algoritma penyelesaian masalah yang cocok adalah dynamic programming. Dynamic Programming merupakan salah satu strategi algoritma dengan memecah persoalan dari masalah yang kompleks menjadi masalah yang lebih sederhana lalu menggunakan solusi dari masalah yang sederhana untuk mendapapatkan solusi permasalahan awal. Kelebihan yang signifikan dari dynammic programming adalah adanya memoisaisi atau penyimpanan nilai agar tidak melakukannya berulang ulang kali.
+
+
+
 ## Penilaian
 - Kebenaran keluaran fungsi - 40%
 - Pemahaman tentang dynamic programming dan path finding (jelaskan langkah yang digunakan secara singkat) - 30%
